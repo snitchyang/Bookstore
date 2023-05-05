@@ -55,13 +55,13 @@ export default function OrderCard({order}) {
             title: 'Price',
             dataIndex: 'books',
             key: 'bookPrice',
-            render: (_, orderItem) => <text>{'￥' + orderItem.total_price}</text>
+            render: (_, orderItem) => <text>{'￥' + orderItem.total_price.toFixed(2)}</text>
         },
         {
             title: 'Total',
             dataIndex: 'books',
             key: 'totalPrice',
-            render: () => <text>{'￥' + total_price}</text>,
+            render: () => <text>{'￥' + total_price.toFixed(2)}</text>,
             onCell: (_, index) => {
                 let row_span = index === 0 ? orderItems.length : 0
                 return {

@@ -72,4 +72,6 @@ export const placeOrder = () => {
                 )
             })
         })
+    //clear cart
+    sessionStorage.setItem('cart', JSON.stringify([]))
 }

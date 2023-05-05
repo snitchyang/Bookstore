@@ -26,6 +26,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public int addOrderItem(OrderItem orderItem) {
+//        orderItem.setOrder(orderRepository.findById(orderItem.getOrderID()).orElse(null));
         orderItemRepository.saveAndFlush(orderItem);
         return orderItem.getId();
     }

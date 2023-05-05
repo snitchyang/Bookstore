@@ -12,7 +12,10 @@ public class OrderItem {
     @Id
     @Column(name = "id")
     public Integer id;
-    @Column(name = "orderID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parentOrderID")
+    public Order order;
+    @Column(name = "")
     public int orderID;
     @Column(name = "bookID")
     public int bookID;
@@ -30,5 +33,4 @@ public class OrderItem {
         this.bookNumber = bookNumber;
         this.total_price = total_price;
     }
-
 }
