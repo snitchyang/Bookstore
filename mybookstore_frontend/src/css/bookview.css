@@ -1,0 +1,39 @@
+.inputBox{
+    margin-top: 40px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.ant-input-suffix{
+    width: 50px;
+}
+.carousel{
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 45vh;
+}
+.bookGrid{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10px;
+}
+.book{
+    border-color: black;
+    border-width: thick;
+}
+.bookName{
+    margin-top: 5px;
+    text-align: center;
+}
+.bookPrice{
+    margin-top:5px;
+    font-size: large;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+.pagination{
+    margin-left: 35%;
+    margin-right: 10%;
+    align-items: center;
+    justify-content: center;
+}

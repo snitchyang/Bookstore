@@ -1,0 +1,5 @@
+export {default as book1} from './book1.jpg'
+export {default as book2} from './book2.jpg'
+export {default as book3} from './book3.jpg'
+export {default as book4} from './book4.jpg'
+export {default as jerry} from './jerry.jpg'
