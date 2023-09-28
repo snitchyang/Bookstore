@@ -4,12 +4,14 @@ import {getOrderItemsByOrderId} from "../service/OrderService";
 import {getBookByID} from "../service/BookService";
 
 export default function OrderCard({order}) {
-    const total_price = order.total_price
     const [orderItems, setOrderItems] = useState([])
     const [bookOrders, setBookOrders] = useState([])
+    const total_price = order.total_price
     const getOrderItems = async () => {
         const newOrderItems = await getOrderItemsByOrderId(order.id)
         setOrderItems(newOrderItems)
+        console.log(order.id)
+        console.log(newOrderItems)
     }
     const getBookOrders = async (orderItems) => {
         const bookPromises = orderItems.map(async (orderItem)=> {
@@ -24,7 +26,8 @@ export default function OrderCard({order}) {
         })
         const newBookOrders = await Promise.all(bookPromises)
         setBookOrders(newBookOrders)
-        console.log(newBookOrders)
+        // console.log(order.id)
+        // console.log(newBookOrders)
     }
     useEffect(() => {
         getOrderItems()
@@ -58,6 +61,20 @@ export default function OrderCard({order}) {
             render: (_, orderItem) => <text>{'￥' + orderItem.total_price.toFixed(2)}</text>
         },
         {
+            title: 'Date',
+            dataIndex: 'books',
+            key: 'orderDate',
+            render: () => {
+                return <text>{order.order_date}</text>
+            },
+            onCell: (_, index) => {
+                let row_span = index === 0 ? orderItems.length : 0
+                return {
+                    rowSpan: row_span
+                }
+            }
+        },
+        {
             title: 'Total',
             dataIndex: 'books',
             key: 'totalPrice',
@@ -73,7 +90,7 @@ export default function OrderCard({order}) {
     const data = bookOrders
     return (
         <div>
-            <h3>{'订单编号：' + order.id}</h3>
+            <h3>{'订单编号：' + order.id + ' 用户： ' + order.userID}</h3>
             <Table columns={columns} dataSource={data} pagination={false}/>
         </div>
     )

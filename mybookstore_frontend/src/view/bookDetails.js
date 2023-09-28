@@ -64,10 +64,6 @@ export default function BookDetails(){
                     <Button size={"large"} onClick={addToCart}>
                         加入购物车
                     </Button>
-
-                    <Button size={"large"} style={{marginLeft:"15%", backgroundColor:'red', color:'white'}} onClick={purchase}>
-                        立即购买
-                    </Button>
                 </div>
             </div>
         </div>

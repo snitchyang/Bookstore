@@ -9,6 +9,7 @@ import {BookOutlined, MoneyCollectOutlined, ShoppingCartOutlined, UserOutlined} 
 export default function Sidebar(){
     const location = useLocation()
     const navigate = useNavigate()
+    const userRole = sessionStorage.getItem('userRole')
     if(location.pathname === '/'){
         console.log('redirecting!')
         redirect('/books')
@@ -44,6 +45,51 @@ export default function Sidebar(){
                         <a href="/profile">My Profile</a>
                     </span>
                 </Menu.Item>
+                {
+                    userRole != 'admin' &&
+                    <Menu.Item key="/statistics">
+                        <span style={{ fontSize: '16px'}}>
+                            <UserOutlined style={{marginRight:10}} />
+                            <a href="/statistics">Statistics</a>
+                        </span>
+                    </Menu.Item>
+                }
+                {
+                    userRole === 'admin' &&
+                    <Menu.Item key="/manageUser">
+                        <span style={{ fontSize: '16px'}}>
+                            <UserOutlined style={{marginRight:10}} />
+                            <a href="/manageUser">Manage Users</a>
+                        </span>
+                    </Menu.Item>
+                }
+                {
+                    userRole === 'admin' &&
+                    <Menu.Item key="/manageBook">
+                        <span style={{ fontSize: '16px'}}>
+                            <UserOutlined style={{marginRight:10}} />
+                            <a href="/manageBook">Manage Books</a>
+                        </span>
+                    </Menu.Item>
+                }
+                {
+                    userRole === 'admin' &&
+                    <Menu.Item key="/manageOrder">
+                        <span style={{ fontSize: '16px'}}>
+                            <UserOutlined style={{marginRight:10}} />
+                            <a href="/manageOrder">Manage Orders</a>
+                        </span>
+                    </Menu.Item>
+                }
+                {
+                    userRole === 'admin' &&
+                    <Menu.Item key="/userRanking">
+                        <span style={{ fontSize: '16px'}}>
+                            <UserOutlined style={{marginRight:10}} />
+                            <a href="/userRanking">Ranking</a>
+                        </span>
+                    </Menu.Item>
+                }
             </Menu>
         </div>
     )

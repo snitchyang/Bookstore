@@ -21,16 +21,18 @@ public class Book {
     public String author;
     @Column(name = "cover")
     public String cover;
+    @Column(name = "inventory", columnDefinition = "int default 100")
+    public int inventory = 100;
 
     //constructor
     public Book(){
     }
-    public Book(int id, String title, double price, String author, String cover){
-        this.id = id;
+    public Book(String title, double price, String author, String cover, int inventory){
         this.title = title;
         this.price = price;
         this.author = author;
         this.cover = cover;
+        this.inventory = inventory;
     }
 
 }

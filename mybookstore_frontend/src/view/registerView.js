@@ -69,6 +69,18 @@ export default function RegisterView(){
                     >
                         <Input/>
                     </Form.Item>
+                    <Form.Item
+                        label="邮箱"
+                        name="email"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your email address!',
+                            },
+                        ]}
+                    >
+                        <Input/>
+                    </Form.Item>
 
                     <Form.Item
                         label="密码"

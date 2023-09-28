@@ -13,7 +13,7 @@ public class UserAuth {
     @Column(name = "id")
     public Integer id;
     //foreign key to user table
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
     public User user;
     @Column(name = "role")

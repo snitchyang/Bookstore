@@ -25,4 +25,24 @@ public class BookServiceImpl implements BookService{
     public Book getBooksByTitle(String title) {
         return null;
     }
+
+    @Override
+    public boolean decreaseInventory(int id, int quantity){
+        Book book = bookRepository.findById(id).orElse(null);
+        if(book != null){
+            book.setInventory(book.getInventory() - quantity);
+            bookRepository.saveAndFlush(book);
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public void saveBook(Book book){
+        bookRepository.saveAndFlush(book);
+    }
+
+    @Override
+    public void deleteBook(int id){
+        bookRepository.deleteById(id);
+    }
 }

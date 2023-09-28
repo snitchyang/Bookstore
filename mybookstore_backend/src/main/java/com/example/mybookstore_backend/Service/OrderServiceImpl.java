@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -51,5 +52,21 @@ public class OrderServiceImpl implements OrderService{
     public List<OrderItem> getAllOrderItems(int orderId){
         //get all order items of an order
         return orderItemRepository.findAllByOrderID(orderId);
+    }
+
+    @Override
+    public List<OrderItem> getAllOrderItems(){
+        //get all order items
+        return orderItemRepository.findAll();
+    }
+
+    @Override
+    public Optional<Order> getOrderById(int orderId) {
+        return orderRepository.findById(orderId);
+    }
+
+    @Override
+    public List<Order> getAllOrders(){
+        return orderRepository.findAll();
     }
 }

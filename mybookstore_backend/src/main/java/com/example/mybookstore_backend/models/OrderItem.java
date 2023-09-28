@@ -1,6 +1,13 @@
 package com.example.mybookstore_backend.models;
 
+import com.example.mybookstore_backend.Dao.OrderItemRepository;
+import com.example.mybookstore_backend.Service.OrderService;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 
@@ -8,14 +15,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "OrderItem")
 public class OrderItem {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     public Integer id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parentOrderID")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "orderID", insertable = false, updatable = false)
     public Order order;
-    @Column(name = "")
     public int orderID;
     @Column(name = "bookID")
     public int bookID;

@@ -6,12 +6,17 @@ import BookView from "./view/bookView";
 import CartView from "./view/cartView";
 import OrderView from "./view/orderView";
 import ProfileView from "./view/profileView";
+import ManageUser from "./view/manageUser";
+import ManageBook from "./view/manageBook";
+import ManageOrder from "./view/manageOrder";
 import BookDetails from "./view/bookDetails";
 import Login from "./view/loginView";
 import {useState} from "react";
 import Authentication from "./component/authentication";
 import loginView from "./view/loginView";
 import RegisterView from "./view/registerView";
+import UserRankingView from "./view/UserRankingView";
+import StatisticsView from "./view/StatisticsView";
 
 function App() {
     const userStateStored = sessionStorage.getItem('user')
@@ -52,8 +57,28 @@ function App() {
                     element: <ProfileView/>
                 },
                 {
+                    path: 'statistics',
+                    element: <StatisticsView />
+                },
+                {
                     path: 'books/:bookName',
                     element: <BookDetails/>
+                },
+                {
+                    path: 'manageUser',
+                    element: <ManageUser />
+                },
+                {
+                    path: 'manageBook',
+                    element: <ManageBook />
+                },
+                {
+                    path: 'manageOrder',
+                    element: <ManageOrder />
+                },
+                {
+                    path: 'userRanking',
+                    element: <UserRankingView />
                 }
             ]
         },

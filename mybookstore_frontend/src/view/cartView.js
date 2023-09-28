@@ -4,9 +4,23 @@ import '../css/cartview.css'
 import books from '../constant/books'
 import {Button, Image, InputNumber, Table} from "antd";
 import {placeOrder} from "../service/OrderService";
+import {checkBookInventory} from "../service/BookService";
 
 export default function CartView(){
     const originData= JSON.parse(sessionStorage.getItem('cart'))
+    console.log(originData)
+    const changeBookNumber = async (book, number) => {
+        const isEnough = await checkBookInventory(book.id, number)
+        console.log(isEnough)
+        if(isEnough) {
+            setCount(book.title, number)
+        }else{
+            alert('Not enough books!')
+            setCount(book.title, 0)
+            //refresh the page
+            window.location.reload()
+        }
+    }
     const columns = [
         {
             title: 'Cover',
@@ -24,7 +38,7 @@ export default function CartView(){
             title: 'Amount',
             key: 'amount',
             dataIndex: 'amount',
-            render:(_, order_entry) => <InputNumber defaultValue={order_entry.count} min={1} onChange={value => setCount(order_entry.book.title, value)}/>
+            render:(_, order_entry) => <InputNumber defaultValue={order_entry.count} min={1} onChange={(value) => changeBookNumber(order_entry.book, value)}/>
         },
         {
             title: 'Price',

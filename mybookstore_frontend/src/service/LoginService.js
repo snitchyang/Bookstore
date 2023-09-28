@@ -2,21 +2,19 @@ import axios from 'axios';
 
 const url = 'http://localhost:8080'
 
-const sendLoginRequest = (username, password) => {
-    let isSuccessful = false
-    axios.get( url + '/login', {
-            params: {
-                username: username,
-                password: password
-            }
-        }
-    ).then(
-        response => {
-            console.log(response.data)
-            isSuccessful = response.data === 'Login Success'
-        }
-    )
-    return isSuccessful
+export const userLogin = async (username, password) => {
+    let response = await fetch(url + '/login' + '?username=' + username + '&password=' + password, {
+        credentials: 'include',
+    })
+    let code = await response.json()
+    return code
 }
 
-export default sendLoginRequest
+export const userLogout = async () => {
+    let response = await fetch(url + '/login/logout', {
+        credentials: 'include'
+    })
+    let duration = await response.json()
+    return duration
+}
+

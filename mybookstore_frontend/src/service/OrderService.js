@@ -10,6 +10,11 @@ export const getOrdersById = async (userId) => {
     return response.data
 }
 
+export const getAllOrders = async () => {
+    const response = await axios.get(URL + '/allOrders')
+    return response.data
+}
+
 export const getOrderItemsByOrderId = async (orderId) => {
     const response = await axios.get(URL + '/orderItems', {
         params: {
@@ -17,6 +22,11 @@ export const getOrderItemsByOrderId = async (orderId) => {
         }
     })
     return response.data
+}
+
+export const getAllOrderItems = async () => {
+    const response = await axios.get(URL + '/allOrderItems');
+    return response.data;
 }
 
 export const addOrder = async (userId, totalPrice, date) => {
@@ -52,7 +62,7 @@ export const addOrderItem = async (orderId, bookId, bookNumber, total_price) => 
 
 export const placeOrder = () => {
     const new_order = JSON.parse(sessionStorage.getItem('cart'))
-    const userID = sessionStorage.getItem('userID')
+    const userID = sessionStorage.getItem('userId')
     console.log(new_order)
     let totalPrice = 0
     new_order.forEach(item => {
@@ -74,4 +84,8 @@ export const placeOrder = () => {
         })
     //clear cart
     sessionStorage.setItem('cart', JSON.stringify([]))
+    //alert
+    alert('Order placed successfully!')
+    //refresh
+    window.location.reload()
 }

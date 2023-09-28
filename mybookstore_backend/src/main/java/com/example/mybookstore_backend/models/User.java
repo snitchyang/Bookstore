@@ -19,6 +19,8 @@ public class User {
     public String password;
     @Column(name = "avatar")
     public String avatar;
+    @Column(name = "status", columnDefinition = "varchar(255) default 'OK'")
+    public String status;
 
     //constructor
     public User() {
@@ -26,5 +28,6 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        this.status = "OK";
     }
 }

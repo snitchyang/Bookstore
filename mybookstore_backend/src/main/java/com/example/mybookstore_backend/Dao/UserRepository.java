@@ -13,4 +13,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findById(Integer id);
 //    //add user to database
 //    User save(User user);
+    List<User> findAll();
 }

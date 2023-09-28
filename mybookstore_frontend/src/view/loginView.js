@@ -4,6 +4,7 @@ import Header from "../component/header";
 import "../css/loginView.css"
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {userLogin} from "../service/LoginService";
 
 const admin = {username: 'admin', password: 'admin'}
 
@@ -11,33 +12,22 @@ const admin = {username: 'admin', password: 'admin'}
 const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
+
+
 const url = 'http://localhost:8080'
 const Login = ({setLoginState}) => {
     const navigate = useNavigate()
     const [loginButtonText, setLoginButtonText] = useState('登录')
-    const onFinish = (values) => {
-        axios.get( url + '/login', {
-                params: {
-                    username: values.username,
-                    password: values.password
-                }
-            }
-        ).then(
-            response => {
-                console.log(response.data)
-                if (response.data >= 0) {
-                    console.log("登录成功")
-                    sessionStorage.setItem('userID', response.data)
-                    setLoginState(values.username)
-                }
-                else{
-                    alert('用户名或密码错误')
-                    setLoginButtonText('登录')
-                }
-            }
-        )
+    const onFinish = async (values) => {
         setLoginButtonText('登录中...')
-
+        let result = await userLogin(values.username, values.password)
+        console.log(result)
+        if (result != -1) {
+            console.log('登录成功')
+            sessionStorage.setItem('user', values.username)
+            sessionStorage.setItem('userId', result)
+            navigate('/books')
+        }
     };
     return (
         <>
@@ -109,7 +99,7 @@ const Login = ({setLoginState}) => {
                         <Button type="primary" htmlType="submit">
                             {loginButtonText}
                         </Button>
-                        <Button type="link" htmlType="button">
+                        <Button type="link" htmlType="button" onClick={() => {navigate('/register')}}>
                             注册
                         </Button>
                     </Form.Item>
